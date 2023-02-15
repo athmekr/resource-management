@@ -1,14 +1,16 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Employee from '../models/employee.model'
 
-const createEmployee = (req: Request, res: Response, next: NextFunction) => {
-    const { name } = req.body;
-    console.log("body: ", req.body);
+const createEmployee = (req: Request, res: Response) => {
+    const { firstname, surname, hiringDate, skills } = req.body;
 
     const employee = new Employee({
         _id: new mongoose.Types.ObjectId(),
-        name
+        firstname,
+        surname,
+        hiringDate,
+        skills
     });
 
     return employee
@@ -16,21 +18,23 @@ const createEmployee = (req: Request, res: Response, next: NextFunction) => {
         .then((employee) => res.status(201).json({ employee }))
         .catch((error) => res.status(500).json({ error }));
 };
-const readEmployee = (req: Request, res: Response, next: NextFunction) => {
+const readEmployee = (req: Request, res: Response) => {
     const employeeId = req.params.employeeId;
 
     return Employee
         .findById(employeeId)
+        .populate('skills')
         .then((employee) => employee ? res.status(200).json({ employee }) : res.status(404).json({ message: 'Employee not found!'}))
         .catch((error) => res.status(500).json({ error }));
 };
-const readAllEmployees = (req: Request, res: Response, next: NextFunction) => {
+const readAllEmployees = (req: Request, res: Response) => {
     return Employee
         .find()
+        .populate('skills')
         .then((employees) => res.status(200).json({ employees }))
-        .catch((error) => res.status(500).json({ message: 'erororroororo' }));
+        .catch((error) => res.status(500).json({ error }));
 };
-const updateEmployee = (req: Request, res: Response, next: NextFunction) => {
+const updateEmployee = (req: Request, res: Response) => {
     const employeeId = req.params.employeeId;
 
     return Employee
@@ -49,7 +53,7 @@ const updateEmployee = (req: Request, res: Response, next: NextFunction) => {
         })
         .catch((error) => res.status(500).json({ error }));
 };
-const deleteEmployee = (req: Request, res: Response, next: NextFunction) => {
+const deleteEmployee = (req: Request, res: Response) => {
     const employeeId = req.params.employeeId;
 
     return Employee

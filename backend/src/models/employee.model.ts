@@ -1,17 +1,23 @@
 import mongoose, {Document, Schema} from "mongoose";
 
 export interface IEmployee {
-    name: string;
+    firstname: string;
+    surname: string;
+    hiringDate: Date;
+    skills: string[];
 }
 
-export interface IEmployeeModel extends IEmployee {}
+export interface IEmployeeModel extends IEmployee, Document {}
 
 const EmployeeSchema: Schema = new Schema(
     {
-        name: {type: String, required: true}
+        firstname: {type: String, required: true},
+        surname: {type: String, required: true},
+        hiringDate: {type: Date, required: true},
+        skills: {type: [Schema.Types.ObjectId], required: true, ref: 'Skill'},
     },
     {
-        versionKey: false
+        timestamps: true
     }
 );
 

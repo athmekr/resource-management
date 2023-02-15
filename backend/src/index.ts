@@ -1,15 +1,15 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
-import connect from "./services/connect";
-import Logger from "./services/logger";
-import employeeRoutes from "./routes/employee.routes";
+import connect from './services/connect';
+import Logger from './services/logger';
+import employeeRoutes from './routes/employee.routes';
+import skillRoutes from './routes/skills.routes'
 
 dotenv.config();
-// const cors = require(cors);
+
 const app: Express = express();
 const port = process.env.SERVER_URL;
 
-app.use(express.json())
 app.use((req, res, next) =>{
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -20,15 +20,14 @@ app.use((req, res, next) =>{
     next();
 })
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 /** Routes */
 app.use('/employees', employeeRoutes);
+app.use('/skills', skillRoutes);
 
-// app.get('/', (req, res) => {
-//     res.status(200).json({message: 'yo'});
-//     // res.send('Server is running!');
-// });
-
-// Error handling
+/** Error handling for non existing route */
 app.use((req, res) => {
     const error = new Error('not found');
     Logger.error(error);
