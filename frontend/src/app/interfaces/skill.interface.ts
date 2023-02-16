@@ -1,4 +1,4 @@
-export class Skill {
+export interface Skill {
   objectId: string;
   title: string;
   description: string;
