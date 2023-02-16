@@ -12,6 +12,8 @@ import { EmployeeCreateComponent } from './components/employee-create/employee-c
 import { SkillsViewComponent } from './components/skills-view/skills-view.component';
 import { SkillCreateComponent } from './components/skill-create/skill-create.component';
 import { SkillDetailedComponent } from './components/skill-detailed/skill-detailed.component';
+import { HttpClientModule } from '@angular/common/http'
+
 //Angular Material Modules
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
@@ -20,6 +22,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     RouterLink,
     MatInputModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HttpClientModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
