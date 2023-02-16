@@ -15,8 +15,8 @@ const createEmployee = (req: Request, res: Response) => {
 
     return employee
         .save()
-        .then((employee) => res.status(201).json({ employee }))
-        .catch((error) => res.status(500).json({ error }));
+        .then((employee) => res.status(201).send(employee))
+        .catch((error) => res.status(500).send({ error }));
 };
 const readEmployee = (req: Request, res: Response) => {
     const employeeId = req.params.employeeId;
@@ -24,15 +24,15 @@ const readEmployee = (req: Request, res: Response) => {
     return Employee
         .findById(employeeId)
         .populate('skills')
-        .then((employee) => employee ? res.status(200).json({ employee }) : res.status(404).json({ message: 'Employee not found!'}))
-        .catch((error) => res.status(500).json({ error }));
+        .then((employee) => employee ? res.status(200).send(employee) : res.status(404).send({ message: 'Employee not found!'}))
+        .catch((error) => res.status(500).send({ error }));
 };
 const readAllEmployees = (req: Request, res: Response) => {
     return Employee
         .find()
         .populate('skills')
-        .then((employees) => res.status(200).json({ employees }))
-        .catch((error) => res.status(500).json({ error }));
+        .then((employees) => res.status(200).send(employees))
+        .catch((error) => res.status(500).send({ error }));
 };
 const updateEmployee = (req: Request, res: Response) => {
     const employeeId = req.params.employeeId;
@@ -45,21 +45,21 @@ const updateEmployee = (req: Request, res: Response) => {
 
                 return employee
                     .save()
-                    .then((employee) => res.status(201).json({ employee }))
-                    .catch((error) => res.status(500).json({ error }));
+                    .then((employee) => res.status(201).send(employee))
+                    .catch((error) => res.status(500).send({ error }));
             } else {
-                res.status(404).json({ message: 'Employee not found!'});
+                res.status(404).send({ message: 'Employee not found!'});
             }
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) => res.status(500).send({ error }));
 };
 const deleteEmployee = (req: Request, res: Response) => {
     const employeeId = req.params.employeeId;
 
     return Employee
         .findByIdAndDelete(employeeId)
-        .then( (employee) => employee ? res.status(201).json({ message: 'Employee deleted!' }) : res.status(404).json({ message: 'Employee not found!'}))
-        .catch((error) => res.status(500).json({ error }));
+        .then( (employee) => employee ? res.status(201).send({ message: 'Employee deleted!' }) : res.status(404).send({ message: 'Employee not found!'}))
+        .catch((error) => res.status(500).send({ error }));
 };
 
 export default {
