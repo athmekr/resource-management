@@ -11,11 +11,11 @@ import { SkillCreateComponent } from "./components/skill-create/skill-create.com
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
   { path: 'employees', component: EmployeesViewComponent, pathMatch: 'full' },
-  { path: 'employees/:id', component: EmployeeDetailedComponent, pathMatch: 'full' },
   { path: 'employees/create', component: EmployeeCreateComponent, pathMatch: 'full' },
+  { path: 'employees/:id', component: EmployeeDetailedComponent, pathMatch: 'full' },
   { path: 'skills', component: SkillsViewComponent, pathMatch: 'full' },
-  { path: 'skills/:id', component: SkillDetailedComponent, pathMatch: 'full' },
   { path: 'skills/create', component: SkillCreateComponent, pathMatch: 'full' },
+  { path: 'skills/:id', component: SkillDetailedComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

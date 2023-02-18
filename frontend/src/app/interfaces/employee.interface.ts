@@ -1,7 +1,7 @@
 import { Skill } from "./skill.interface";
 
 export interface Employee {
-  objectId: string;
+  _id: string;
   firstname: string;
   surname: string;
   hiringDate: string;

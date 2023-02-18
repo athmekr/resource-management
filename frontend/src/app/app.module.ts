@@ -23,6 +23,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -36,22 +37,23 @@ import { MatSortModule } from "@angular/material/sort";
     SkillCreateComponent,
     SkillDetailedComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterOutlet,
-    MatCardModule,
-    RouterLink,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    HttpClientModule,
-    MatSortModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        RouterOutlet,
+        MatCardModule,
+        RouterLink,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        HttpClientModule,
+        MatSortModule,
+        MatTooltipModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
