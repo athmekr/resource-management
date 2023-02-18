@@ -24,6 +24,10 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { FormsModule } from "@angular/forms";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -37,23 +41,27 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     SkillCreateComponent,
     SkillDetailedComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        RouterOutlet,
-        MatCardModule,
-        RouterLink,
-        MatInputModule,
-        MatTableModule,
-        MatPaginatorModule,
-        HttpClientModule,
-        MatSortModule,
-        MatTooltipModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    RouterOutlet,
+    MatCardModule,
+    RouterLink,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    HttpClientModule,
+    MatSortModule,
+    MatTooltipModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
