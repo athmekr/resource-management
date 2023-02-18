@@ -1,9 +1,23 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-</mat-form-field>
+<mat-card>
 
 <div class="mat-elevation-z8">
+
+  <div style="display: flex; justify-content: space-between;">
+    <div style="align-self: center;">
+      <mat-form-field style="display: flex; justify-content: start;">
+        <mat-label>Search employee</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Thanos" #input>
+      </mat-form-field>
+
+    </div>
+    <div style="align-self: center;">
+      <button mat-raised-button
+              color="basic"
+              style="display: flex; justify-content: end; color: white; margin-right: 1rem"
+              routerLink="create">Create employee</button>
+    </div>
+  </div>
+
   <table mat-table [dataSource]="dataSource" matSort>
 
     <!-- Firstname Column -->
@@ -42,6 +56,27 @@
       <td mat-cell *matCellDef="let row"> {{row.updatedAt}} </td>
     </ng-container>
 
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center"> Actions </th>
+      <td mat-cell *matCellDef="let row" style="text-align: center">
+        <button mat-icon-button
+                color="accent"
+                matTooltip="Edit employee"
+                matTooltipPosition="above"
+                routerLink="{{row._id}}">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button
+                color="warn"
+                matTooltip="Delete employee"
+                matTooltipPosition="above"
+                (click)="onDelete(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
@@ -53,4 +88,4 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
-
+</mat-card>
