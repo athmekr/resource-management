@@ -37,6 +37,8 @@ const readAllEmployees = (req: Request, res: Response) => {
 const updateEmployee = (req: Request, res: Response) => {
     const employeeId = req.params.employeeId;
 
+    console.log("params ", req.params);
+    console.log("body ", req.body);
     return Employee
         .findById(employeeId)
         .then((employee) => {

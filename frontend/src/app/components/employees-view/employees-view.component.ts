@@ -20,7 +20,7 @@ export class EmployeesViewComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor( private employeeService: EmployeeService ) {
-    this.getEmployees();
+    // this.getEmployees();
     this.dataSource = new MatTableDataSource(this.employees);
   }
 
