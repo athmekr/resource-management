@@ -6,8 +6,6 @@ import { EmployeeService } from "../../services/employee.service";
 import { Employee } from "../../interfaces/employee.interface";
 import swal from "sweetalert2";
 
-
-
 @Component({
   selector: 'app-employees-view',
   templateUrl: './employees-view.component.html',
@@ -22,17 +20,17 @@ export class EmployeesViewComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor( private employeeService: EmployeeService ) {
-    this.getSkills();
+    this.getEmployees();
     this.dataSource = new MatTableDataSource(this.employees);
   }
 
   ngAfterViewInit() {
-    this.getSkills();
+    this.getEmployees();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  getSkills(){
+  getEmployees(){
     this.employeeService.getEmployees().subscribe(employees => {
       this.employees = employees;
       console.log(this.employees);
@@ -59,7 +57,7 @@ export class EmployeesViewComponent implements AfterViewInit {
       if (result.isConfirmed) {
         this.employeeService.deleteEmployee(employee._id)
           .subscribe( () => {
-            this.getSkills();
+            this.getEmployees();
           });
         swal.fire(
           'Deleted!',

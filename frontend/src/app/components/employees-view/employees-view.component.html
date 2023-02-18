@@ -1,91 +1,90 @@
 <mat-card>
+  <div class="mat-elevation-z8">
 
-<div class="mat-elevation-z8">
+    <div style="display: flex; justify-content: space-between;">
+      <div style="align-self: center;">
+        <mat-form-field style="display: flex; justify-content: start;">
+          <mat-label>Search employee</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Thanos" #input>
+        </mat-form-field>
 
-  <div style="display: flex; justify-content: space-between;">
-    <div style="align-self: center;">
-      <mat-form-field style="display: flex; justify-content: start;">
-        <mat-label>Search employee</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Thanos" #input>
-      </mat-form-field>
-
+      </div>
+      <div style="align-self: center;">
+        <button mat-raised-button
+                color="basic"
+                style="display: flex; justify-content: end; color: white; margin-right: 1rem"
+                routerLink="create">Create employee</button>
+      </div>
     </div>
-    <div style="align-self: center;">
-      <button mat-raised-button
-              color="basic"
-              style="display: flex; justify-content: end; color: white; margin-right: 1rem"
-              routerLink="create">Create employee</button>
-    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Firstname Column -->
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
+        <td mat-cell *matCellDef="let row"> {{row.firstname}} </td>
+      </ng-container>
+
+      <!-- Surname Column -->
+      <ng-container matColumnDef="surname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Surname </th>
+        <td mat-cell *matCellDef="let row"> {{row.surname}} </td>
+      </ng-container>
+
+      <!-- Skills Column -->
+      <ng-container matColumnDef="skills">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Skills </th>
+        <td mat-cell *matCellDef="let row"> {{row.skills}} </td>
+      </ng-container>
+
+      <!-- hiring date Column -->
+      <ng-container matColumnDef="hiringDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hiring date </th>
+        <td mat-cell *matCellDef="let row"> {{row.hiringDate}} </td>
+      </ng-container>
+
+      <!-- createdAt Column -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+        <td mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
+      </ng-container>
+
+      <!-- updatedAt Column -->
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated </th>
+        <td mat-cell *matCellDef="let row"> {{row.updatedAt}} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Actions </th>
+        <td mat-cell *matCellDef="let row" style="text-align: center">
+          <button mat-icon-button
+                  color="accent"
+                  matTooltip="Edit employee"
+                  matTooltipPosition="above"
+                  routerLink="{{row._id}}">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button
+                  color="warn"
+                  matTooltip="Delete employee"
+                  matTooltipPosition="above"
+                  (click)="onDelete(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   </div>
-
-  <table mat-table [dataSource]="dataSource" matSort>
-
-    <!-- Firstname Column -->
-    <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Firstname </th>
-      <td mat-cell *matCellDef="let row"> {{row.firstname}} </td>
-    </ng-container>
-
-    <!-- Surname Column -->
-    <ng-container matColumnDef="surname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Surname </th>
-      <td mat-cell *matCellDef="let row"> {{row.surname}} </td>
-    </ng-container>
-
-    <!-- Skills Column -->
-    <ng-container matColumnDef="skills">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Skills </th>
-      <td mat-cell *matCellDef="let row"> {{row.skills}} </td>
-    </ng-container>
-
-    <!-- hiring date Column -->
-    <ng-container matColumnDef="hiringDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Hiring date </th>
-      <td mat-cell *matCellDef="let row"> {{row.hiringDate}} </td>
-    </ng-container>
-
-    <!-- createdAt Column -->
-    <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
-      <td mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
-    </ng-container>
-
-    <!-- updatedAt Column -->
-    <ng-container matColumnDef="updatedAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated </th>
-      <td mat-cell *matCellDef="let row"> {{row.updatedAt}} </td>
-    </ng-container>
-
-    <!-- Action Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef style="text-align: center"> Actions </th>
-      <td mat-cell *matCellDef="let row" style="text-align: center">
-        <button mat-icon-button
-                color="accent"
-                matTooltip="Edit employee"
-                matTooltipPosition="above"
-                routerLink="{{row._id}}">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button
-                color="warn"
-                matTooltip="Delete employee"
-                matTooltipPosition="above"
-                (click)="onDelete(row)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-</div>
 </mat-card>
