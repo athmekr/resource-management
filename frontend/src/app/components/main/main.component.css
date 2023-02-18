@@ -1,16 +1,17 @@
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-/* Create four equal columns that sits next to each other */
-.column {
-  flex: 50%;
-  max-width: 30%;
-  padding: 0 4px;
-}
-
 p {
   color: white;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.card-container {
+  text-align:center;
+  width: 380px;
+  height: 380px;
+  cursor: pointer
 }

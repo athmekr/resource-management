@@ -1,17 +1,24 @@
-<div class="row">
-  <div class="column">
-    <mat-card class="mat-elevation-z2" style="margin-top:5rem; text-align:center; width: 380px; height: 380px">
+<div  class="flex-container">
+    <div [class.mat-elevation-z2]="!activeHoverEmployees"
+         [class.mat-elevation-z10]="activeHoverEmployees"
+         style="margin-top:10rem;"
+         (mouseover)="activateHover('employees')"
+         (mouseleave)="deactivateHover('employees')">
+    <mat-card class="card-container" routerLink="/employees">
       <p>Meet our employees!</p>
       <img mat-card-image style="height: 270px;" src="../../../assets/img/employees.jpg" alt="Photo of employees">
       <p>Click to show</p>
     </mat-card>
   </div>
 
-
-  <div class="column">
-    <mat-card class="mat-elevation-z8" style="margin-top:5rem; text-align:center; width: 380px; height: 380px">
+  <div [class.mat-elevation-z2]="!activeHoverSkills"
+       [class.mat-elevation-z10]="activeHoverSkills"
+       style="margin-top:10rem; margin-left: 5rem;"
+       (mouseover)="activateHover('skills')"
+       (mouseleave)="deactivateHover('skills')">
+    <mat-card class="card-container" routerLink="/skills">
       <p>Meet our skills!</p>
-      <img mat-card-image style="height: 270px; background-color: white" src="../../../assets/img/skills.png" alt="Photo of employees">
+      <img mat-card-image style="height: 270px; background-color: white" src="../../../assets/img/skills.png" alt="Photo of skills">
       <p>Click to show</p>
     </mat-card>
   </div>
