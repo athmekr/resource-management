@@ -1,5 +1,5 @@
 export interface Skill {
-  objectId: string;
+  _id: string;
   title: string;
   description: string;
   createdAt: string;
