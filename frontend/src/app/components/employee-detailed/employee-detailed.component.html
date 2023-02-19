@@ -29,9 +29,8 @@
 
   <mat-card-content>
     <mat-form-field style="width: 50%" appearance="fill">
-      <mat-label>Hiring date</mat-label>
+      <mat-label>Hiring date <small>(dd/mm/yyy)</small></mat-label>
       <input matInput required [matDatepicker]="picker" [(ngModel)]="employee.hiringDate">
-      <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

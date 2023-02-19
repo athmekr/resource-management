@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Employee } from "../../interfaces/employee.interface";
 import { EmployeeService } from "../../services/employee.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -9,8 +9,9 @@ import swal from "sweetalert2";
 @Component({
   selector: 'app-employee-detailed',
   templateUrl: './employee-detailed.component.html',
-  styleUrls: ['./employee-detailed.component.css']
+  styleUrls: ['./employee-detailed.component.css'],
 })
+
 export class EmployeeDetailedComponent implements OnInit {
 
   public employee: Employee;
@@ -18,7 +19,9 @@ export class EmployeeDetailedComponent implements OnInit {
   public allSkills: Skill[] = [];
   public createdDate: string;
   public updatedDate: string;
-  constructor( private employeeService: EmployeeService, private skillService: SkillService, private route: ActivatedRoute, private router: Router ) {
+  public minDate: Date;
+  public maxDate: Date;
+  constructor( private employeeService: EmployeeService, private skillService: SkillService, private route: ActivatedRoute, private router: Router) {
   }
   ngOnInit() {
     this.initValues();
@@ -46,6 +49,11 @@ export class EmployeeDetailedComponent implements OnInit {
   }
 
   private initValues() {
+    const currentYear = new Date().getFullYear();
+    // Set the minimum to January 1st 20 years in the past and maximum to December 31st of current year.
+    this.minDate = new Date(currentYear - 20, 0, 1);
+    this.maxDate = new Date(currentYear, 11, 31);
+
     this.selectedSkills = [];
     this.employee = {
       _id: '',
@@ -59,6 +67,7 @@ export class EmployeeDetailedComponent implements OnInit {
   }
 
   private validateEmployee(){
+    // All fields required
     if (this.employee.skills.length < 1 || !this.employee.firstname || !this.employee.surname || !this.employee.hiringDate) {
       swal.fire(
         'Warning!',
@@ -66,7 +75,18 @@ export class EmployeeDetailedComponent implements OnInit {
         'warning'
       )
       return false;
-    } else return true;
+    }
+    // Hiring date min & max validation
+    const hiringDate = new Date(this.employee.hiringDate);
+    if (this.minDate >= hiringDate || hiringDate >= this.maxDate) {
+      swal.fire(
+        'Warning!',
+        'Hiring date should be between January 1st 20 years in the past and December 31st of current year!',
+        'warning'
+      )
+      return false;
+    }
+    return true;
   }
 
   onSave(): void {
