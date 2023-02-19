@@ -12,16 +12,16 @@ export class SkillService{
     return this.httpClient.get<Skill[]>(`${this.url}/skills/get`);
   }
 
-  getSkill() {
-
+  getSkill(skillId: string) {
+    return this.httpClient.get<Skill>(`${this.url}/skills/get/${skillId}`);
   }
 
-  updateSkill() {
-
+  updateSkill(skill: Skill) {
+    return this.httpClient.patch<Skill>(`${this.url}/skills/update/${skill._id}`, skill);
   }
 
-  createSkill(){
-
+  createSkill(skill: Skill){
+    return this.httpClient.post<Skill>(`${this.url}/skills/create`, skill);
   }
 
   deleteSkill(skillId: string) {
