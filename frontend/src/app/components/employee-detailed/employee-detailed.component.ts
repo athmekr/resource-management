@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import { Employee } from "../../interfaces/employee.interface";
 import { EmployeeService } from "../../services/employee.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import swal from "sweetalert2";
 import { SkillService } from "../../services/skill.service";
 import { Skill } from "../../interfaces/skill.interface";
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-employee-detailed',
@@ -43,7 +43,6 @@ export class EmployeeDetailedComponent implements OnInit {
     this.skillService.getSkills().subscribe(skills => {
       this.allSkills = skills;
     });
-
   }
 
   private initValues() {
@@ -59,13 +58,25 @@ export class EmployeeDetailedComponent implements OnInit {
     }
   }
 
+  private validateEmployee(){
+    if (this.employee.skills.length < 1 || !this.employee.firstname || !this.employee.surname || !this.employee.hiringDate) {
+      swal.fire(
+        'Warning!',
+        'All fields are mandatory!',
+        'warning'
+      )
+      return false;
+    } else return true;
+  }
+
   onSave(): void {
     this.employee.skills = this.selectedSkills;
+    if (!this.validateEmployee()) return;
     this.employeeService.updateEmployee(this.employee).subscribe((employee: Employee) => {
       this.employee = employee;
       this.router.navigate(['/employees']);
       swal.fire(
-        'Updated!',
+        'Success!',
         'Employee has been updated!',
         'success'
       )
