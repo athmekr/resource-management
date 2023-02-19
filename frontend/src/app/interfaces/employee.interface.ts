@@ -8,4 +8,6 @@ export interface Employee {
   skills: Skill[];
   createdAt: string;
   updatedAt: string;
+
+  skillList?: string[];
 }
