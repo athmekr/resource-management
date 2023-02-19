@@ -20,16 +20,19 @@ export class SkillsViewComponent implements AfterViewInit {
 
   constructor( private skillService: SkillService ) {
     this.getSkills();
-    this.dataSource = new MatTableDataSource(this.skills);
   }
 
   ngAfterViewInit() {
     this.getSkills();
-    this.dataSource.paginator = this.paginator;
+  }
+
+  private dataSourceSetup() {
+    this.dataSource = new MatTableDataSource(this.skills);
+    setTimeout(() => this.dataSource.paginator = this.paginator);
     this.dataSource.sort = this.sort;
   }
 
-  getSkills(){
+  private getSkills(){
     this.skillService.getSkills().subscribe(skills => {
       this.skills = skills;
       this.skills.forEach( skill => {
@@ -38,11 +41,11 @@ export class SkillsViewComponent implements AfterViewInit {
         skill.createdAt = createdDate.toLocaleDateString('en-GB');
         skill.updatedAt = updatedDate.toLocaleDateString('en-GB');
       });
-      this.dataSource = new MatTableDataSource(this.skills);
+      this.dataSourceSetup();
     });
   }
 
-  onDelete(skill: Skill){
+  public onDelete(skill: Skill){
     swal.fire({
       title: `Are you sure you want to delete skill ${skill.title}?`,
       text: "You won't be able to revert this!",
@@ -66,7 +69,7 @@ export class SkillsViewComponent implements AfterViewInit {
     })
   }
 
-  applyFilter(event: Event) {
+  public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 

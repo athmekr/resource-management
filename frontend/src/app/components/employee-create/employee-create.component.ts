@@ -21,7 +21,6 @@ export class EmployeeCreateComponent implements OnInit{
   }
   ngOnInit() {
     this.initValues();
-    // this.getEmployee();
     this.getSkills();
   }
 

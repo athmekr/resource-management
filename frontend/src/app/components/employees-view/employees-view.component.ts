@@ -26,7 +26,8 @@ export class EmployeesViewComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.getEmployees();
   }
-
+  //TODO fix hiring date
+  //TODO table UI fix in employees and skills
   private dataSourceSetup() {
     this.dataSource = new MatTableDataSource(this.employees);
     setTimeout(() => this.dataSource.paginator = this.paginator);
@@ -36,7 +37,6 @@ export class EmployeesViewComponent implements AfterViewInit {
   private getEmployees(){
     this.employeeService.getEmployees().subscribe(employees => {
       this.employees = employees;
-      console.log(this.employees);
       // Format employee data
       this.employees.forEach( employee => {
         let skillList: string[] = [];
