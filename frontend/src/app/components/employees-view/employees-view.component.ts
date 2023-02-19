@@ -40,8 +40,10 @@ export class EmployeesViewComponent implements AfterViewInit {
       // Format employee data
       this.employees.forEach( employee => {
         let skillArray: string[] = [];
+        let hiringDate = new Date(employee.hiringDate);
         let createdDate = new Date(employee.createdAt);
         let updatedDate = new Date(employee.updatedAt);
+        employee.hiringDate = hiringDate.toLocaleDateString('en-GB');
         employee.createdAt = createdDate.toLocaleDateString('en-GB');
         employee.updatedAt = updatedDate.toLocaleDateString('en-GB');
         employee.skills.forEach( skill => {
