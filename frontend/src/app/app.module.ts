@@ -20,14 +20,17 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatChipsModule } from "@angular/material/chips";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -41,27 +44,31 @@ import { MatNativeDateModule } from '@angular/material/core';
     SkillCreateComponent,
     SkillDetailedComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    RouterOutlet,
-    MatCardModule,
-    RouterLink,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    HttpClientModule,
-    MatSortModule,
-    MatTooltipModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        RouterOutlet,
+        MatCardModule,
+        RouterLink,
+        MatInputModule,
+        MatFormFieldModule,
+        MatTableModule,
+        MatPaginatorModule,
+        HttpClientModule,
+        MatSortModule,
+        MatTooltipModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatChipsModule,
+        MatSelectModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

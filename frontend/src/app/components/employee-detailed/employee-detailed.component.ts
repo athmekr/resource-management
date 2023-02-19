@@ -3,6 +3,8 @@ import { Employee } from "../../interfaces/employee.interface";
 import { EmployeeService } from "../../services/employee.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import swal from "sweetalert2";
+import { SkillService } from "../../services/skill.service";
+import { Skill } from "../../interfaces/skill.interface";
 
 @Component({
   selector: 'app-employee-detailed',
@@ -11,24 +13,41 @@ import swal from "sweetalert2";
 })
 export class EmployeeDetailedComponent implements OnInit {
 
-  // public employee: { skills: any[]; createdAt: string; firstname: string; hiringDate: string; surname: string; updatedAt: string };
   public employee: Employee;
-
-  constructor( private employeeService: EmployeeService, private route: ActivatedRoute, private router: Router ) {
+  public selectedSkills: Skill[] = [];
+  public allSkills: Skill[] = [];
+  public createdDate: string;
+  public updatedDate: string;
+  constructor( private employeeService: EmployeeService, private skillService: SkillService, private route: ActivatedRoute, private router: Router ) {
   }
   ngOnInit() {
     this.initValues();
     this.getEmployee();
+    this.getSkills();
   }
 
   getEmployee(){
     const employeeId = this.route.snapshot.params['id'];
     this.employeeService.getEmployee(employeeId).subscribe((employee: Employee) => {
       this.employee = employee;
+      this.createdDate = new Date(employee.createdAt).toLocaleDateString('en-GB');
+      this.updatedDate = new Date(employee.updatedAt).toLocaleDateString('en-GB');
+      this.selectedSkills = this.employee.skills;
     });
   }
+  comparer(o1: Skill, o2: Skill): boolean {
+    // if possible compare by object's name, and not by reference.
+    return o1 && o2 ? o1.title === o2.title : o2 === o2;
+  }
+  getSkills() {
+    this.skillService.getSkills().subscribe(skills => {
+      this.allSkills = skills;
+    });
 
-  initValues() {
+  }
+
+  private initValues() {
+    this.selectedSkills = [];
     this.employee = {
       _id: '',
       firstname: '',
@@ -41,11 +60,9 @@ export class EmployeeDetailedComponent implements OnInit {
   }
 
   onSave(): void {
-    // const formData = new FormData();
-    console.log('Employee new: ', this.employee)
+    this.employee.skills = this.selectedSkills;
     this.employeeService.updateEmployee(this.employee).subscribe((employee: Employee) => {
       this.employee = employee;
-      console.log('Employee updated!')
       this.router.navigate(['/employees']);
       swal.fire(
         'Updated!',
