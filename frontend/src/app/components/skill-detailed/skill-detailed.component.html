@@ -1,1 +1,56 @@
-<p>skill-detailed works!</p>
+
+<mat-card class="skill-card">
+  <mat-card-title style="color:#4a4a4a; margin-bottom: 2rem">
+    Edit skill "{{skill.title}}"
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-form-field style="width: 50%" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput required [(ngModel)]="skill.title">
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-content>
+    <mat-form-field style="width: 50%" appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput required [(ngModel)]="skill.description">
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-content>
+    <mat-form-field style="width: 50%" appearance="fill">
+      <mat-label>Creation date</mat-label>
+      <input disabled matInput [ngModel]="createdDate">
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-content>
+    <mat-form-field style="width: 50%" appearance="fill">
+      <mat-label>Last update date</mat-label>
+      <input disabled matInput [ngModel]="updatedDate">
+    </mat-form-field>
+  </mat-card-content>
+
+  <div style="display: flex; justify-content: end;">
+    <div>
+      <button mat-raised-button
+              color="accent"
+              style="background-color: #22a26b; display: flex; justify-content: end; color: white; margin-right: 1rem"
+              (click)="onSave()">
+        Save
+      </button>
+    </div>
+    <div>
+      <button mat-raised-button
+              color="basic"
+              style=" background-color: #4a4a4a; display: flex; justify-content: end; color: white; margin-right: 1rem"
+              (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+</mat-card>
+
+
