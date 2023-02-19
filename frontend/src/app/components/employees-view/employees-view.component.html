@@ -1,5 +1,4 @@
-<div class="mat-elevation-z8">
-  <mat-card>
+<mat-card class="employee-view-card">
     <div style="display: flex; justify-content: space-between;">
       <div style="align-self: center;">
         <mat-form-field style="display: flex; justify-content: start;">
@@ -11,7 +10,7 @@
       <div style="align-self: center;">
         <button mat-raised-button
                 color="basic"
-                style="display: flex; justify-content: end; color: white; margin-right: 1rem"
+                style="display: flex; justify-content: end; color: white; margin-right: 1rem; background-color: #424242"
                 routerLink="create">Create employee</button>
       </div>
     </div>
@@ -85,5 +84,4 @@
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of employees"></mat-paginator>
-  </mat-card>
-</div>
+</mat-card>
