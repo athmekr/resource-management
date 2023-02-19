@@ -16,8 +16,7 @@ export class EmployeeCreateComponent implements OnInit{
   public employee: Employee;
   public selectedSkills: Skill[] = [];
   public allSkills: Skill[] = [];
-  public createdDate: string;
-  public updatedDate: string;
+
   constructor( private employeeService: EmployeeService, private skillService: SkillService, private route: ActivatedRoute, private router: Router ) {
   }
   ngOnInit() {
