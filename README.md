@@ -39,7 +39,12 @@ $ npm install
 To run the development version:
 
 ```
-$ ng serve
+for the frontend:
+$ cd frontend
+$ npm start (or ng serve)
+
+for the backend:
+$ cd backend
 $ npm start (or nodemon)
 
 *** .env file is needed for backend ***
