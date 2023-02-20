@@ -1,14 +1,9 @@
 import express, { Express } from 'express';
-import dotenv from 'dotenv';
-import connect from './services/connect';
 import Logger from './services/logger';
 import employeeRoutes from './routes/employee.routes';
 import skillRoutes from './routes/skills.routes'
 
-dotenv.config();
-
 const app: Express = express();
-const port = process.env.SERVER_URL;
 
 app.use((req, res, next) =>{
     res.header('Access-Control-Allow-Origin', '*');
@@ -34,7 +29,5 @@ app.use((req, res) => {
     return res.status(404).json({message: error.message});
 })
 
-app.listen(port, async () => {
-    await connect();
-    Logger.info(`Server is running at http://localhost:${port}`);
-});
+
+export default app;
