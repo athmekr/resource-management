@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SkillService } from "../../services/skill.service";
 import { Skill } from "../../interfaces/skill.interface";
 import swal from "sweetalert2";
+import {ngxCsv} from "ngx-csv";
 
 @Component({
   selector: 'app-skills-view',
@@ -43,6 +44,37 @@ export class SkillsViewComponent implements AfterViewInit {
       });
       this.dataSourceSetup();
     });
+  }
+
+  public exportCSV() {
+    const csv = this.skills.map((skill) => {
+      return {
+        'title':skill.title,
+        'description':skill.description,
+        'createdAt':skill.createdAt,
+        'updatedAt':skill.updatedAt
+      }
+    });
+
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: 'Skills',
+      useBom: true,
+      noDownload: false,
+      headers: ["Title", "Description", "Created date", "Updated date"]
+    };
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const filename: string = `skills_${day + '/' + month + '/' + year}`;
+
+    new ngxCsv(csv, filename, options);
   }
 
   public onDelete(skill: Skill){

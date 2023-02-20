@@ -55,7 +55,7 @@ export class EmployeesViewComponent implements AfterViewInit {
     });
   }
 
-  exportCSV() {
+  public exportCSV() {
     const csv = this.employees.map((employee) => {
       return {
         'firstname':employee.firstname,
@@ -73,13 +73,19 @@ export class EmployeesViewComponent implements AfterViewInit {
       decimalseparator: '.',
       showLabels: true,
       showTitle: true,
-      title: 'Your title',
+      title: 'Employees',
       useBom: true,
       noDownload: false,
       headers: ["First Name", "Last Name", "Skills", "Hiring date", "Created date", "Updated date"]
     };
 
-    new ngxCsv(csv, 'My Report', options);
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const filename: string = `employees_${day + '/' + month + '/' + year}`;
+
+    new ngxCsv(csv, filename, options);
   }
 
   public onDelete(employee: Employee){
