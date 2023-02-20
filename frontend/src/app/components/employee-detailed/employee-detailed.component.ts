@@ -48,6 +48,30 @@ export class EmployeeDetailedComponent implements OnInit {
     });
   }
 
+  public onDelete(){
+    swal.fire({
+      title: `Are you sure you want to delete employee ${this.employee.firstname + ' ' + this.employee.surname}?`,
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#f44336',
+      cancelButtonColor: '#919191',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.employeeService.deleteEmployee(this.employee._id)
+          .subscribe( () => {
+            this.router.navigate(['/employees'])
+          });
+        swal.fire(
+          'Deleted!',
+          'Employee has been deleted.',
+          'success'
+        )
+      }
+    })
+  }
+
   private initValues() {
     const currentYear = new Date().getFullYear();
     // Set the minimum to January 1st 20 years in the past and maximum to December 31st of current year.

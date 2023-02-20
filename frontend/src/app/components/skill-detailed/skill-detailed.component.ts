@@ -52,6 +52,29 @@ export class SkillDetailedComponent implements OnInit {
     } else return true;
   }
 
+  public onDelete(){
+    swal.fire({
+      title: `Are you sure you want to delete skill ${this.skill.title}?`,
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#f44336',
+      cancelButtonColor: '#919191',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.skillService.deleteSkill(this.skill._id)
+          .subscribe( () => {
+            this.router.navigate(['/skills']);
+          });
+        swal.fire(
+          'Deleted!',
+          'Skill has been deleted.',
+          'success'
+        )
+      }
+    })
+  }
   onSave(): void {
     if (!this.validateSkill()) return;
     this.skillService.updateSkill(this.skill).subscribe(() => {
