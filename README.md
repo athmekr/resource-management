@@ -41,6 +41,8 @@ To run the development version:
 ```
 $ ng serve
 $ npm start (or nodemon)
+
+*** .env file is needed for backend ***
 ```
 
 ## Testing
