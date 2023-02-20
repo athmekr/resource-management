@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeService } from "../../services/employee.service";
 import { Employee } from "../../interfaces/employee.interface";
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 import swal from "sweetalert2";
 
 @Component({
@@ -26,8 +27,7 @@ export class EmployeesViewComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.getEmployees();
   }
-  //TODO fix hiring date
-  //TODO table UI fix in employees and skills
+
   private dataSourceSetup() {
     this.dataSource = new MatTableDataSource(this.employees);
     setTimeout(() => this.dataSource.paginator = this.paginator);
@@ -53,6 +53,33 @@ export class EmployeesViewComponent implements AfterViewInit {
       });
       this.dataSourceSetup();
     });
+  }
+
+  exportCSV() {
+    const csv = this.employees.map((employee) => {
+      return {
+        'firstname':employee.firstname,
+        'surname':employee.surname,
+        'skills':employee.skillList,
+        'hiringDate':employee.hiringDate,
+        'createdAt':employee.createdAt,
+        'updatedAt':employee.updatedAt
+      }
+    });
+
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: 'Your title',
+      useBom: true,
+      noDownload: false,
+      headers: ["First Name", "Last Name", "Skills", "Hiring date", "Created date", "Updated date"]
+    };
+
+    new ngxCsv(csv, 'My Report', options);
   }
 
   public onDelete(employee: Employee){
