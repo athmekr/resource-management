@@ -2,3 +2,7 @@
   margin: 10rem auto;
   width: 90%;
 }
+
+.mat-mdc-table {
+  overflow: auto;
+}

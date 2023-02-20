@@ -1,7 +1,7 @@
-<div  class="flex-container">
+<div class="flex-container">
     <div [class.mat-elevation-z2]="!activeHoverEmployees"
          [class.mat-elevation-z10]="activeHoverEmployees"
-         style="margin-top:10rem;"
+         style="margin-top:10rem"
          (mouseover)="activateHover('employees')"
          (mouseleave)="deactivateHover('employees')">
     <mat-card class="card-container" routerLink="/employees">
@@ -13,7 +13,7 @@
 
   <div [class.mat-elevation-z2]="!activeHoverSkills"
        [class.mat-elevation-z10]="activeHoverSkills"
-       style="margin-top:10rem; margin-left: 5rem;"
+       style="margin-top:10rem"
        (mouseover)="activateHover('skills')"
        (mouseleave)="deactivateHover('skills')">
     <mat-card class="card-container" routerLink="/skills">

@@ -6,7 +6,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .card-container {
