@@ -53,7 +53,7 @@ $ npm start (or nodemon)
 ## Testing
 
 ```
-There are 2 tests cases to validate employees and skills happy path. More to be added soon.
+There are 6 tests cases to validate employees and skills happy path. More to be added soon.
 
 $ cd backend
 $ npm test
