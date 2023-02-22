@@ -1,8 +1,14 @@
 import supertest from 'supertest';
+import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-
 import app from "../app";
 import mongoose from "mongoose";
+
+export const skillPayload = {
+    title: "test skill",
+    description: " testing the skill"
+}
+
 describe("skill", () => {
 
     beforeAll( async () => {
@@ -23,11 +29,19 @@ describe("skill", () => {
             });
         });
 
-        // describe("given the employee does exist", () => {
-        //     it('should return a 200', async () => {
-        //         const employeeId = '63f2b29571db681c364e8c54';
-        //         await supertest(app).get(`/employees/get/${employeeId}`).expect(200);
-        //     });
-        // });
+        describe("given the skill does exist", () => {
+            it('should return a 200', async () => {
+                const create = await request(app).post(`/skills/create`).send(skillPayload);
+                await request(app).get(`/skills/get/${create.body._id}`)
+                expect(200);
+            });
+        });
+
+        describe("at the creation of a skill", () => {
+            it('should return a 201', async () => {
+                const response = await request(app).post('/skills/create').send(skillPayload)
+                expect(response.statusCode).toBe(201);
+            });
+        });
     })
 });
